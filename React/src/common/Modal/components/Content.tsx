@@ -1,5 +1,5 @@
 import React, {FC, HTMLAttributes, PropsWithChildren, useContext} from 'react';
-import ModalContext from "shared/common/Modal/context/ModalContext.ts";
+import ModalContext from "common/Modal/context/ModalContext.ts";
 import {twMerge} from "tailwind-merge";
 import {createPortal} from "react-dom";
 
@@ -15,7 +15,7 @@ const Content: FC<ContentProps> = ({className, children, ...props}) => {
         (
             <div
                 {...props}
-                className={twMerge("fixed inset-0 p-5 z-30 flex justify-center items-center", className)}
+                className={twMerge("fixed inset-0 p-5 z-20 flex justify-center items-center", className)}
                 onClick={closeOutside ? () => setOpen(false) : undefined}
             >
                 {children}

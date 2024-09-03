@@ -1,5 +1,5 @@
-import Intent from "shared/common/Badge/components/Intent.ts";
-import Outline from "shared/common/Badge/components/Outline.ts";
+import Intent from "common/Badge/components/Intent.ts";
+import Outline from "common/Badge/components/Outline.ts";
 
 const variants = {
     intent: Intent,

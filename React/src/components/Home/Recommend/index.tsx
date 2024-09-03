@@ -1,32 +1,31 @@
 import Item from "components/Item";
+import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
+import {Product} from "types/Product";
+import {useCallback, useEffect} from "react";
+import ProductService from "services/ProductService";
 
 const Recommend = () => {
-    const furnitureItems: Item[] = [
+    const [items, setItems] = useCallAPIState<Product[]>(
         {
-            name: "Ghế sofa",
-            price: 15000000,
-            discount: 10,
-            image: "/images/products/0f35c4be-e682-46b2-a816-2d019295db2d.jpg"
-        },
-        {
-            name: "Bàn ăn",
-            price: 8500000,
-            discount: 15,
-            image: "/images/products/0f35c4be-e682-46b2-a816-2d019295db2d.jpg"
-        },
-        {
-            name: "Tủ quần áo",
-            price: 12000000,
-            discount: 20,
-            image: "/images/products/0f35c4be-e682-46b2-a816-2d019295db2d.jpg"
-        },
-        {
-            name: "Đèn trần",
-            price: 2500000,
-            discount: 5,
-            image: "/images/products/0f35c4be-e682-46b2-a816-2d019295db2d.jpg"
+            status: CALL_API_STATUS.IDLE,
+            data: []
         }
-    ];
+    )
+
+    const fetchData = useCallback(async () => {
+        setItems(CALL_API_STATUS.LOADING, [])
+        const {payload, success} = await ProductService.get()
+        if (success) {
+            setItems(CALL_API_STATUS.SUCCESS, payload)
+            return
+        }
+        setItems(CALL_API_STATUS.ERROR, [])
+    }, [setItems])
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
+
     return (
         <div
             className="max-w-1200 mx-auto py-16"
@@ -36,7 +35,7 @@ const Recommend = () => {
                 className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6"
             >
                 {
-                    furnitureItems.map((item, index) => <Item key={index} item={item}/>)
+                    items.data.map((item) => <Item key={item.id} item={item}/>)
                 }
 
             </div>

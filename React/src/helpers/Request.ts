@@ -1,7 +1,16 @@
 import {AxiosError, AxiosResponse} from "axios";
-import {ResponseBase} from "shared/types/Response.ts";
 
-export const requestApiHelper = async <D = any, M = any>(promise: Promise<AxiosResponse<ResponseBase<D, M>>>): Promise<ResponseBase<D, M>> => {
+export interface ResponseBase<D , M > {
+    error: boolean
+    success: boolean
+    errorDetail?: unknown
+    code?: number
+    httpStatus?: number
+    payload?: D
+    message?: M
+}
+
+export const requestApiHelper = async <D = never , M = never >(promise: Promise<AxiosResponse<ResponseBase<D, M>>>): Promise<ResponseBase<D, M>> => {
     try {
         const { data } = await promise
         return data

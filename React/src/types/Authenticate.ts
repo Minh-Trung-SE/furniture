@@ -55,14 +55,3 @@ export type Authenticated = {
     user: User
     token: Token
 }
-
-export type Tenant = {
-    id: string
-    tenant: string
-    displayName: string
-}
-
-export type Authorized = {
-    actions: string[]
-    tenants: Tenant[]
-}

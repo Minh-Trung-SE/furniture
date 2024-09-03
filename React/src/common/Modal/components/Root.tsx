@@ -1,5 +1,5 @@
 import React, {FC, PropsWithChildren, useCallback, useState} from 'react';
-import ModalContext from "shared/common/Modal/context/ModalContext.ts";
+import ModalContext from "common/Modal/context/ModalContext.ts";
 
 type RootProps = PropsWithChildren & {
     closeOutside?: boolean

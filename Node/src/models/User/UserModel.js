@@ -1,4 +1,4 @@
-const { STRING, INTEGER, JSON, Sequelize, Model } = require("sequelize");
+const { STRING, INTEGER, JSON, Model } = require("sequelize");
 const { Postgres } = require("@databases/SequelizePostgres");
 
 const MODEL = "User";
@@ -19,6 +19,7 @@ const TABLE = "users";
 
 /**
  * @class User
+ * @extends Model<UserModel,UserModel>
  * @property {number} [id] - User id
  * @property {string} username - User username
  * @property {string} password - User password
@@ -38,7 +39,7 @@ User.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        username: {
+        email: {
             type: STRING,
             unique: true,
             allowNull: false,

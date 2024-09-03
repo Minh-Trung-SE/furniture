@@ -1,6 +1,6 @@
 import {AxiosResponse} from "axios";
 
-export type ResponseBase<D = any, M = any> = {
+export type ResponseBase<D = never, M = never> = {
     error: false
     success: true
     code: number
@@ -12,11 +12,11 @@ export type ResponseBase<D = any, M = any> = {
 } | {
     error: true
     success: false
-    code?: any
-    httpStatus?: any
-    message?: any
-    payload?: any
-    meta?: any
-    original?: any
-    errorDetail?: unknown | any
+    code?: never
+    httpStatus?: never
+    message?: never
+    payload?: never
+    meta?: never
+    original?: never
+    errorDetail?: unknown | never
 }

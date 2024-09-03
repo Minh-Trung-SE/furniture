@@ -1,22 +1,17 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {authenticateReducer} from "shared/contexts/Authenticate";
+import {authenticateReducer} from "contexts/Authenticate";
+import {cartReducer} from "contexts/Cart";
+import {orderReducer} from "contexts/Order";
 
 export const store = configureStore(
     {
         reducer: {
-            authenticate: authenticateReducer
-        },
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware(
-            {
-                serializableCheck: {
-                    ignoredActions: ["authenticate/loadCredential"],
-                    ignoredActionPaths: ["payload.errorDetail"],
-                    ignoredPaths: ['items.dates'],
-                },
-            }
-        )
+            authenticate: authenticateReducer,
+            cart: cartReducer,
+            order: orderReducer
+        }
     }
 )
 
-export type ShareState = ReturnType<typeof store.getState>
+export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

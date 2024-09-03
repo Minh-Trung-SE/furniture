@@ -1,5 +1,5 @@
 import React, {FC, HTMLAttributes, PropsWithChildren, useContext, useMemo} from 'react';
-import ModalContext from "shared/common/Modal/context/ModalContext.ts";
+import ModalContext from "common/Modal/context/ModalContext.ts";
 import {twMerge} from "tailwind-merge";
 
 type TriggerProps = PropsWithChildren & HTMLAttributes<HTMLDivElement> & {

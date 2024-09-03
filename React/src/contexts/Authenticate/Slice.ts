@@ -1,13 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {AUTHENTICATE_STATUS} from "shared/contexts/Authenticate/Enum.ts";
-import {loadCredential} from "shared/contexts/Authenticate/Mindleware.ts";
-import {AuthenticateState} from "shared/contexts/Authenticate/Type.ts";
+import {AUTHENTICATE_STATUS} from "contexts/Authenticate/Enum.ts";
+import {loadCredential} from "contexts/Authenticate/Mindleware.ts";
+import {AuthenticateState} from "contexts/Authenticate/Type.ts";
 
 const initialState: AuthenticateState = {
     status: AUTHENTICATE_STATUS.IDLE,
     message: "Idle.",
     authenticated: undefined,
-    authorized: undefined
 }
 
 
@@ -20,7 +19,6 @@ const authenticateSlice = createSlice(
                 state.status = AUTHENTICATE_STATUS.UNAUTHORIZED
                 state.message = "Unauthorized."
                 state.authenticated = undefined
-                state.authorized = undefined
             },
             updateCredential: (state, action:PayloadAction<Partial<AuthenticateState>>): void => {
                 const {payload} = action
@@ -39,15 +37,13 @@ const authenticateSlice = createSlice(
                     state.status = AUTHENTICATE_STATUS.FETCHING
                     state.message = "Fetching."
                     state.authenticated = undefined
-                    state.authorized = undefined
                 }
             ).addCase(
                 loadCredential.rejected,
                 (state) => {
-                    state.status = AUTHENTICATE_STATUS.CANCEL
+                    state.status = AUTHENTICATE_STATUS.AUTHENTICATED
                     state.message = "Fetching abort."
                     state.authenticated = undefined
-                    state.authorized = undefined
                 }
             ).addCase(
                 loadCredential.fulfilled,
@@ -56,15 +52,13 @@ const authenticateSlice = createSlice(
                     if (success) {
                         state.status = AUTHENTICATE_STATUS.AUTHENTICATED
                         state.message = "Authenticated."
-                        state.authorized = payload.authorized
-                        state.authenticated = payload.authenticated
+                        state.authenticated = payload
                         return
                     }
 
                     state.status = AUTHENTICATE_STATUS.UNAUTHORIZED
                     state.message = "Unauthorized."
                     state.authenticated = undefined
-                    state.authorized = undefined
                 }
             )
         }

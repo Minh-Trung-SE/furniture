@@ -1,4 +1,11 @@
+import {useSelector} from "react-redux";
+import {AppState} from "contexts/root";
+import {AUTHENTICATE_STATUS} from "contexts/Authenticate";
+import {Link} from "react-router-dom";
+
 const Navigation = () => {
+    const {status} = useSelector((state: AppState) => state.authenticate);
+
     return (
         <nav className="bg-secondary">
             <div
@@ -22,23 +29,59 @@ const Navigation = () => {
                 >
                     <ul className="flex space-x-5">
                         <li className="text-white opacity-80 hover:opacity-100 cursor-pointer">
-                            Home
+                            <Link
+                                to="/"
+                                className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                            >
+                                Home
+                            </Link>
                         </li>
-                        <li className="text-white opacity-80 hover:opacity-100 cursor-pointer">
-                            Shop
+                        <li>
+                            <Link
+                                to="/search"
+                                className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                            >
+                                Shop
+                            </Link>
                         </li>
-                        <li className="text-white opacity-80 hover:opacity-100 cursor-pointer">
+                        <Link
+                            to="/about-us"
+                            className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                        >
                             About US
-                        </li>
-                        <li className="text-white opacity-80 hover:opacity-100 cursor-pointer">
+                        </Link>
+                        <Link
+                            to="/contact-us"
+                            className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                        >
                             Contact US
-                        </li>
+                        </Link>
                     </ul>
-                    <button
-                        className="text-white opacity-80 hover:opacity-100 cursor-pointer"
-                    >
-                        Login/Signup
-                    </button>
+                    {
+                        (status === AUTHENTICATE_STATUS.AUTHENTICATED) ? (
+                            <button
+                                className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                            >
+                                Logout
+                            </button>
+                        ) : (
+                            <div>
+                                <Link
+                                    to="/login"
+                                    className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                                >
+                                    Login
+                                </Link>
+                                <span className="px-0.5 text-white opacity-80">/</span>
+                                <Link
+                                    to="/register"
+                                    className="text-white opacity-80 hover:opacity-100 cursor-pointer"
+                                >
+                                    Signup
+                                </Link>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
 

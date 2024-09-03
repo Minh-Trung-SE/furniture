@@ -60,3 +60,20 @@
 body {
     font-family: 'Poppins', sans-serif
 }
+
+.rc-pagination-prev,
+.rc-pagination-item,
+.rc-pagination-next {
+    @apply h-7 min-w-7 p-0.5 inline-flex items-center justify-center transition-all;
+    @apply rounded text-gray-700 cursor-pointer;
+    @apply aria-disabled:cursor-not-allowed aria-disabled:text-gray-500 hover:border;
+    @apply text-zinc-200;
+}
+
+.rc-pagination-item{
+    @apply font-medium;
+}
+
+.rc-pagination-item-active{
+    @apply border border-indigo-500 rounded bg-indigo-500 text-white;
+}

@@ -1,7 +1,11 @@
 import {joiResolver} from "@hookform/resolvers/joi";
 import {ErrorMessage, Form, TextInput} from "common/ReactHookForm";
+import {TRIGGER_TOAST_TYPE} from "common/Sonner";
+import {triggerToast} from "common/Sonner/util";
+import {HTTP_CODE} from "constants/HTTP";
 import Joi from "joi";
 import {Link} from "react-router-dom";
+import AuthenticateService from "services/AuthenticateService";
 
 
 const Register = () => {
@@ -19,7 +23,7 @@ const Register = () => {
                 options={
                     {
                         defaultValues: {
-                            fullName: "",
+                            displayName: "",
                             email: "",
                             password: "",
                             confirmPassword: ""
@@ -27,7 +31,7 @@ const Register = () => {
                         resolver: joiResolver(
                             Joi.object(
                                 {
-                                    fullName: Joi.string().required(),
+                                    displayName: Joi.string().required(),
                                     email: Joi.string().email({tlds: false}).required(),
                                     password: Joi.string().required(),
                                     confirmPassword: Joi.string().valid(Joi.ref("password")).required()
@@ -37,8 +41,27 @@ const Register = () => {
                     }
                 }
                 onSubmit={
-                    (data) => {
-                        console.log(data);
+                    async (data) => {
+                        const {code} = await AuthenticateService.register(data)
+                        if (code == HTTP_CODE.CREATED) {
+                            triggerToast(
+                                {
+                                    type: TRIGGER_TOAST_TYPE.SUCCESS,
+                                    header: "Success",
+                                    body: "Register successfully"
+                                }
+                            )
+                            return
+                        }
+
+                        triggerToast(
+                            {
+                                type: TRIGGER_TOAST_TYPE.ERROR,
+                                header: "Failed",
+                                body: "Register failed"
+                            }
+                        )
+
                     }
                 }
             >
@@ -50,10 +73,10 @@ const Register = () => {
                         </label>
                         <div className="space-y-2">
                             <TextInput
-                                controller={{name: "email"}}
+                                controller={{name: "displayName"}}
                             />
                             <ErrorMessage
-                                name="email"
+                                name="displayName"
                             />
                         </div>
                     </div>
@@ -148,7 +171,8 @@ const Register = () => {
                 </Link>
             </p>
         </div>
-    );
+    )
+        ;
 };
 
 export default Register;

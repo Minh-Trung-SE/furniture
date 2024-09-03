@@ -1,6 +1,6 @@
 import React, {ReactNode} from "react";
-import TRIGGER_TOAST_TYPE from "shared/common/Sonner/enum.ts";
-import Toast from "shared/common/Sonner/Toast.tsx";
+import TRIGGER_TOAST_TYPE from "common/Sonner/enum.ts";
+import Toast from "common/Sonner/Toast.tsx";
 import {ExternalToast, toast} from 'sonner';
 
 type Type = typeof TRIGGER_TOAST_TYPE[keyof typeof TRIGGER_TOAST_TYPE]

@@ -1,12 +1,20 @@
 import {joiResolver} from "@hookform/resolvers/joi";
 import {ErrorMessage, Form, TextInput} from "common/ReactHookForm";
+import {TRIGGER_TOAST_TYPE, triggerToast} from "common/Sonner";
+import {HTTP_CODE} from "constants/HTTP";
 import Joi from "joi";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import AuthenticateService from "services/AuthenticateService";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "contexts/root";
+import {useEffect} from "react";
+import {loadCredential} from "contexts/Authenticate/Mindleware";
 
 
 const Login = () => {
+    const dispatch = useDispatch<AppDispatch>()
 
-
+    const navigate = useNavigate()
     return (
         <div className="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
             <h2 className="text-2xl uppercase font-medium mb-1">
@@ -33,8 +41,29 @@ const Login = () => {
                     }
                 }
                 onSubmit={
-                    (data) => {
-                        console.log(data);
+                    async (data) => {
+                        const {code} = await AuthenticateService.login(data)
+                        if (code === HTTP_CODE.OK) {
+                            triggerToast(
+                                {
+                                    header: "Login success",
+                                    body: "You have been logged in successfully",
+                                    type: TRIGGER_TOAST_TYPE.SUCCESS
+                                }
+                            )
+                            localStorage.setItem("login", "success")
+                            navigate("/")
+                            dispatch(loadCredential())
+                            return
+                        }
+
+                        triggerToast(
+                            {
+                                header: "Login failed",
+                                body: "Email or password is incorrect",
+                                type: TRIGGER_TOAST_TYPE.ERROR
+                            }
+                        )
                     }
                 }
             >

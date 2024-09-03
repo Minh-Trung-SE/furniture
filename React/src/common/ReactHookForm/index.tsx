@@ -8,4 +8,5 @@ export { default as SubmitButton } from "common/ReactHookForm/components/SubmitB
 export { default as TextInput } from "common/ReactHookForm/components/TextInput.tsx";
 export { default as useFormStep } from "common/ReactHookForm/hooks/UseFormStep.ts";
 export { default as TextAreaInput } from "common/ReactHookForm/components/TextAreaInput"
+export { default as FileInput } from "common/ReactHookForm/components/FileInput"
 export type { FormStep, Step } from "common/ReactHookForm/hooks/UseFormStep.ts";

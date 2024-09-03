@@ -40,8 +40,6 @@ const Features = () => {
                         <p className="text-gray-500 text-xs lg:text-sm">Customer support</p>
                     </div>
                 </div>
-
-
             </div>
         </div>
     );
