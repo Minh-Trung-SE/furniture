@@ -1,6 +1,5 @@
 import CircleProgressBar from "common/Chart/CircleProgressBar";
 import {nanoid} from "nanoid/non-secure";
-import React from 'react';
 
 const OrderStatistics = () => {
     return (

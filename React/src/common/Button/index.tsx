@@ -1,6 +1,6 @@
 import {cva, cx} from "class-variance-authority";
-import {ButtonHTMLAttributes, forwardRef, PropsWithChildren} from "react";
 import variants from "common/Button/components";
+import {ButtonHTMLAttributes, forwardRef, PropsWithChildren} from "react";
 
 const button = cva(
     "disabled:opacity-60 disabled:pointer-events-none inline-flex justify-center items-center py-2 px-4 text-sm tracking-wide font-medium rounded-md transition-all duration-300",

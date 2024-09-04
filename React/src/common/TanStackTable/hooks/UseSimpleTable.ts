@@ -11,8 +11,8 @@ import {
     useReactTable,
     VisibilityState,
 } from "@tanstack/react-table";
-import {useEffect, useRef, useState} from "react";
 import {isEmpty} from "lodash";
+import {useEffect, useRef, useState} from "react";
 
 declare module '@tanstack/react-table' {
     interface TableMeta<TData extends RowData> {

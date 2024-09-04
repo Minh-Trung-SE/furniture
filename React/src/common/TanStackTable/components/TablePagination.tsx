@@ -1,6 +1,6 @@
-import { Table } from '@tanstack/react-table';
-import Pagination from 'rc-pagination';
+import {Table} from '@tanstack/react-table';
 import {isEmpty} from "lodash";
+import Pagination from 'rc-pagination';
 
 function TablePagination<T>(props: { table: Table<T> }) {
     const { table: { getPageCount, getState, setPageIndex , getRowModel} } = props

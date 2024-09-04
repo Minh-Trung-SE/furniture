@@ -1,7 +1,9 @@
-import React, {
+import {isEmpty} from "lodash";
+import {
     ChangeEvent,
     ClipboardEvent,
-    FC, HTMLAttributes,
+    FC,
+    HTMLAttributes,
     KeyboardEvent,
     memo,
     useCallback,
@@ -10,7 +12,6 @@ import React, {
     useState
 } from "react"
 import {twMerge} from "tailwind-merge";
-import {isEmpty} from "lodash";
 
 type OtpInputProps = {
     digits: number

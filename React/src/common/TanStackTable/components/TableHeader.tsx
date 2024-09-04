@@ -1,11 +1,6 @@
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import {
-    ArrowDownIcon,
-    ArrowUpIcon,
-    CaretSortIcon,
-    EyeNoneIcon,
-} from "@radix-ui/react-icons";
-import { Header, flexRender } from "@tanstack/react-table";
+import {ArrowDownIcon, ArrowUpIcon, CaretSortIcon, EyeNoneIcon,} from "@radix-ui/react-icons";
+import {flexRender, Header} from "@tanstack/react-table";
 
 
 type TableHeaderProps<T> = {

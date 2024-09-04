@@ -33,6 +33,7 @@ function useCallAPIState<T = any>(initial: { status: Status, data: T }): [State<
                 loading: false,
                 data: data
             }
+            //@ts-ignore
             state[toLower(status)] = true
             return state
         }
@@ -45,7 +46,7 @@ function useCallAPIState<T = any>(initial: { status: Status, data: T }): [State<
             loading: false,
             success: false
         }
-        state[toLower(status)] = true
+        state[toLower(status) as keyof typeof state] = true
         setState(
             ({data: currentData}) => ({...state, data: isUndefined(data) ? currentData : data})
         )

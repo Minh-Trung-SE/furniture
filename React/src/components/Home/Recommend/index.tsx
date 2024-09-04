@@ -1,8 +1,8 @@
 import Item from "components/Item";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import {Product} from "types/Product";
 import {useCallback, useEffect} from "react";
 import ProductService from "services/ProductService";
+import {Product} from "types/Product";
 
 const Recommend = () => {
     const [items, setItems] = useCallAPIState<Product[]>(

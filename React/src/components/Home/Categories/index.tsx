@@ -1,8 +1,8 @@
-import {useCallback, useEffect} from "react";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import {Category} from "types/Category";
-import CategoryService from "services/CategoryService";
+import {useCallback, useEffect} from "react";
 import {Link} from "react-router-dom";
+import CategoryService from "services/CategoryService";
+import {Category} from "types/Category";
 
 
 const Categories = () => {

@@ -1,11 +1,11 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Dialog from '@radix-ui/react-dialog';
-import { CheckIcon, Cross2Icon, GearIcon } from '@radix-ui/react-icons';
+import {CheckIcon, Cross2Icon, GearIcon} from '@radix-ui/react-icons';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { Table } from '@tanstack/react-table';
+import {Table} from '@tanstack/react-table';
 import Button from "common/Button";
-import { capitalize, isString, isUndefined } from 'lodash';
-import { useCallback, useRef, useState } from 'react';
+import {capitalize, isString, isUndefined} from 'lodash';
+import {useCallback, useRef, useState} from 'react';
 
 type Props<T> = {
     table: Table<T>

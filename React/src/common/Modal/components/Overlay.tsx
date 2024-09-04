@@ -1,5 +1,5 @@
-import React, {FC, HTMLAttributes, useContext} from 'react';
 import ModalContext from "common/Modal/context/ModalContext.ts";
+import {FC, HTMLAttributes, useContext} from 'react';
 import {createPortal} from "react-dom";
 import {twMerge} from "tailwind-merge";
 

@@ -1,4 +1,4 @@
-import { Cell, flexRender } from "@tanstack/react-table";
+import {Cell, flexRender} from "@tanstack/react-table";
 
 type TableCellProps<T> = {
     cell: Cell<T, unknown>;

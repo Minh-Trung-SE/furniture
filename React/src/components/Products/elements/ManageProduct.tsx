@@ -12,9 +12,9 @@ import {
 import CreateProduct from "components/Products/elements/CreateProduct";
 import ProductModal from "components/Products/elements/ProductModal";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import {Product} from "types/Product";
 import {useCallback, useEffect} from "react";
 import ProductService from "services/ProductService";
+import {Product} from "types/Product";
 
 const {accessor} = createColumnHelper<Product>();
 

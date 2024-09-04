@@ -1,6 +1,6 @@
-import {FC, HTMLProps} from "react"
 import {cx} from "class-variance-authority"
 import {getColorByName, getName} from "common/Avatar/utils/Letter.ts";
+import {FC, HTMLProps} from "react"
 
 type LetterAvatarProps = HTMLProps<HTMLDivElement> & {
     label: string

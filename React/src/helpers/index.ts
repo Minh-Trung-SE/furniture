@@ -1,1 +1,1 @@
-export * from "shared/helpers/Request"
+export * from "helpers/Request"

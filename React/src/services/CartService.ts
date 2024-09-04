@@ -1,7 +1,7 @@
 import interceptor from "apis/Interceptor";
 import {requestApiHelper} from "helpers/Request";
-import {Product} from "types/Product";
 import {Cart} from "types/Cart";
+import {Product} from "types/Product";
 
 class CartService {
 

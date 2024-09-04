@@ -1,42 +1,38 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "noImplicitAny": false,
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
+    "compilerOptions": {
+        "target": "ES2020",
+        "useDefineForClassFields": true,
+        "noImplicitAny": false,
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "skipLibCheck": true,
+        /* Bundler mode */
+        "moduleResolution": "bundler",
+        "allowImportingTsExtensions": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noFallthroughCasesInSwitch": true,
+        "baseUrl": "src",
+        "composite": true,
+        "types": [
+            "vite/client",
+            "node"
+        ]
+    },
+    "include": [
+        "src"
     ],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true,
-    "baseUrl": "src",
-    "types": [
-      "vite/client",
-      "node"
-    ]
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "build"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+    "exclude": [
+        "build"
+    ],
 }

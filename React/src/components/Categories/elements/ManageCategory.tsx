@@ -2,7 +2,8 @@ import {createColumnHelper} from "@tanstack/react-table";
 import Button from "common/Button";
 import Modal from "common/Modal";
 import {
-    TableHeaderGroups, TableLoadingRow,
+    TableHeaderGroups,
+    TableLoadingRow,
     TablePageSize,
     TablePagination,
     TableRows,

@@ -4,9 +4,9 @@ import {AppDispatch} from "contexts/root";
 import {FC, useCallback} from "react";
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
+import CartService from "services/CartService";
 import {Product} from "types/Product";
 import {getImageURL} from "utils/Image";
-import CartService from "services/CartService";
 
 type ItemProps = {
     item: Product;

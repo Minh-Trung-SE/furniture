@@ -1,6 +1,6 @@
+import TRIGGER_TOAST_TYPE from "common/Sonner/enum.ts";
 import {isString} from "lodash";
 import {FC, ReactNode} from "react";
-import TRIGGER_TOAST_TYPE from "common/Sonner/enum.ts";
 import {toast} from "sonner";
 import {twMerge} from "tailwind-merge";
 

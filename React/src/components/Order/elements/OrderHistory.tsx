@@ -1,6 +1,6 @@
 import Badge from "common/Badge";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import React, {useCallback, useEffect} from 'react';
+import  {useCallback, useEffect} from 'react';
 import orderService from "services/OrderService";
 import OrderService from "services/OrderService";
 import {type Order} from "types/Order";
@@ -42,7 +42,7 @@ const OrderHistory = () => {
                     <p className="text-gray-600 w-20">Action</p>
                 </div>
                 <ul className="space-y-2">
-                {
+                    {
                         order.data.map(
                             (item) => (
                                 <li

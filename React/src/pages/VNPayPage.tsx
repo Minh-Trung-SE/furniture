@@ -1,6 +1,5 @@
 import Breadcrumb from "components/Breadcrumb";
 import VNPay from "components/VNPay";
-import {Link} from "react-router-dom";
 
 const VNPayPage = () => {
 

@@ -1,8 +1,8 @@
 import "styles/main.css"
+import {store} from "contexts/root";
+import {Provider} from "react-redux";
 import AppRouters from "routers";
 import {Toaster} from "sonner";
-import {Provider} from "react-redux";
-import {store} from "contexts/root";
 
 const App = () => {
     return (

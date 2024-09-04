@@ -20,7 +20,7 @@ const ListCheckbox: FC<ListCheckboxProps> = ({items, control, className}) => {
     const fields = field.value as string[] ?? []
 
     const handleOnChange = (value: string) => {
-        return (checked: Checkbox.CheckedState) => {
+        return (checked: boolean | string) => {
             if (checked === true && !fields.includes(value)) {
                 setValue(field.name, [...fields, value])
                 return

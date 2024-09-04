@@ -1,7 +1,7 @@
-import React, {FC, HTMLAttributes, PropsWithChildren, useContext} from 'react';
 import ModalContext from "common/Modal/context/ModalContext.ts";
-import {twMerge} from "tailwind-merge";
+import {FC, HTMLAttributes, PropsWithChildren, useContext} from 'react';
 import {createPortal} from "react-dom";
+import {twMerge} from "tailwind-merge";
 
 type ContentProps = HTMLAttributes<HTMLDivElement> & PropsWithChildren
 const Content: FC<ContentProps> = ({className, children, ...props}) => {

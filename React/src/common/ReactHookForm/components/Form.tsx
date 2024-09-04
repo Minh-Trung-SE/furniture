@@ -1,5 +1,5 @@
-import { FormHTMLAttributes, PropsWithChildren } from "react";
-import { FieldValues, FormProvider, UseFormProps, useForm } from "react-hook-form";
+import {FormHTMLAttributes, PropsWithChildren} from "react";
+import {FieldValues, FormProvider, useForm, UseFormProps} from "react-hook-form";
 
 type FormProps<T extends FieldValues = FieldValues> = PropsWithChildren & Omit<FormHTMLAttributes<HTMLFormElement>, "onSubmit"> & {
     options?: UseFormProps<T>,

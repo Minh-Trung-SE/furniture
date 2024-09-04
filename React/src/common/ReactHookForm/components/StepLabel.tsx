@@ -1,7 +1,6 @@
-
-import { FC, HTMLAttributes } from 'react';
-import { FormStep, Step } from "shared/common/ReactHookForm/hooks/UseFormStep.ts";
-import { twMerge } from "tailwind-merge";
+import {FC, HTMLAttributes} from 'react';
+import {FormStep, Step} from "common/ReactHookForm/hooks/UseFormStep.ts";
+import {twMerge} from "tailwind-merge";
 
 type StepProps = {
     step: Step

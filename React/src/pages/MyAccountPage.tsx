@@ -1,5 +1,4 @@
 import Breadcrumb from "components/Breadcrumb";
-import OrderHistory from "components/Order/elements/OrderHistory";
 import {Outlet} from "react-router-dom";
 
 const MyAccountPage = () => {

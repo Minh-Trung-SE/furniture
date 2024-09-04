@@ -1,8 +1,8 @@
 import Item from "components/Item";
-import {Product} from "types/Product";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import ProductService from "services/ProductService";
 import {useCallback, useEffect} from "react";
+import ProductService from "services/ProductService";
+import {Product} from "types/Product";
 
 const TopNew = () => {
 

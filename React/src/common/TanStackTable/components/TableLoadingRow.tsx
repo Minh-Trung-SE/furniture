@@ -1,4 +1,4 @@
-import { Table } from "@tanstack/react-table";
+import {Table} from "@tanstack/react-table";
 
 function TableLoadingRow<T>(props: { table: Table<T>, message?: string}) {
     const { table, message } = props

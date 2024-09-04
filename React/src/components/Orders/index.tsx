@@ -10,7 +10,7 @@ import {
     useSimpleTable
 } from "common/TanStackTable";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import React, {useCallback, useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import OrderService from "services/OrderService";
 import {type Order} from "types/Order";
 import {Product} from "types/Product";

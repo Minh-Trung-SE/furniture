@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes} from 'react';
+import {FC, HTMLAttributes} from 'react';
 import {twMerge} from "tailwind-merge";
 
 type LoadingProps = HTMLAttributes<HTMLDivElement> & {

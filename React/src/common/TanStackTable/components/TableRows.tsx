@@ -1,4 +1,4 @@
-import { Table } from "@tanstack/react-table";
+import {Table} from "@tanstack/react-table";
 import TableCell from "common/TanStackTable/components/TableCell.tsx";
 import {nanoid} from "nanoid/non-secure";
 

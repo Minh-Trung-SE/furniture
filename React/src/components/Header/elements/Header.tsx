@@ -1,7 +1,7 @@
+import Cart from "components/Header/elements/Cart";
 import Order from "components/Header/elements/Order";
 import {ChangeEvent, useCallback, useState} from "react";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
-import Cart from "components/Header/elements/Cart";
 
 const Header = () => {
     const navigate = useNavigate();

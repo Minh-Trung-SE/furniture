@@ -1,4 +1,4 @@
-import { isEmpty, isString } from "lodash";
+import {isEmpty, isString} from "lodash";
 
 const DEFAULT_COLOR = "#552F72"
 const COLORS = {
@@ -31,7 +31,8 @@ const COLORS = {
 }
 
 export const getColorByName = (name: string): string => {
-    return COLORS[name.at(0)!] ?? DEFAULT_COLOR
+    const letterOnBeHalf = name.at(0) as keyof typeof COLORS
+    return COLORS[letterOnBeHalf] ?? DEFAULT_COLOR
 }
 
 export const getName = (name: string): string => {

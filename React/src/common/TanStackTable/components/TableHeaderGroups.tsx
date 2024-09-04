@@ -1,4 +1,4 @@
-import { Table } from "@tanstack/react-table";
+import {Table} from "@tanstack/react-table";
 import TableHeader from "common/TanStackTable/components/TableHeader.tsx";
 
 function TableHeaderGroups<T = unknown>(props: { table: Table<T> }) {

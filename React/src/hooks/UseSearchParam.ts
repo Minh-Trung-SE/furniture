@@ -1,6 +1,6 @@
 import {isEmpty, isNull} from "lodash";
 import {useCallback, useEffect} from "react";
-import { useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 /**
  * Returns a stateful value and a function to update it, persisted in the URL query params.

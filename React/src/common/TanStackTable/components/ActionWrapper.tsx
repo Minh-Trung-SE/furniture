@@ -1,5 +1,5 @@
-import { VariantProps, cva, cx } from "class-variance-authority";
-import { HTMLAttributes, PropsWithChildren, forwardRef } from "react";
+import {cva, cx, VariantProps} from "class-variance-authority";
+import {forwardRef, HTMLAttributes, PropsWithChildren} from "react";
 
 const action = cva(
     "inline-block",

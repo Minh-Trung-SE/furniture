@@ -1,6 +1,6 @@
 import {cva} from "class-variance-authority";
-import {forwardRef, HTMLAttributes, PropsWithChildren} from "react";
 import variants from "common/Badge/components";
+import {forwardRef, HTMLAttributes, PropsWithChildren} from "react";
 import {twMerge} from "tailwind-merge";
 
 const badge = cva(

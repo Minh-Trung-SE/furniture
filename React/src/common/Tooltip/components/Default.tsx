@@ -1,6 +1,6 @@
-import React, {FC, ReactNode} from 'react';
-import {Provider, Root, Trigger, Portal, Content} from '@radix-ui/react-tooltip';
+import {Content, Portal, Provider, Root, Trigger} from '@radix-ui/react-tooltip';
 import {isNumber, isString} from "lodash";
+import {FC, ReactNode} from 'react';
 
 type DefaultProps = {
     title: ReactNode

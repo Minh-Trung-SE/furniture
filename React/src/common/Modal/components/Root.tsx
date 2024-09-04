@@ -1,5 +1,5 @@
-import React, {FC, PropsWithChildren, useCallback, useState} from 'react';
 import ModalContext from "common/Modal/context/ModalContext.ts";
+import {FC, PropsWithChildren, useCallback, useState} from 'react';
 
 type RootProps = PropsWithChildren & {
     closeOutside?: boolean
@@ -7,8 +7,8 @@ type RootProps = PropsWithChildren & {
 }
 const Root: FC<RootProps> = ({children, closeOutside = false, defaultOpen = false}) => {
     const [open, setOpen] = useState(defaultOpen)
-     const toggle = useCallback(() => setOpen(open => !open), [])
-    
+    const toggle = useCallback(() => setOpen(open => !open), [])
+
     return (
         <ModalContext.Provider
             value={

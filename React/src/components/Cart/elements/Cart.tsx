@@ -1,10 +1,10 @@
-import React, {useCallback, useEffect} from 'react';
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import {Product} from "types/Product";
+import {useCallback, useEffect} from 'react';
+import {Link} from "react-router-dom";
 import CartService from "services/CartService";
 import {type Cart} from "types/Cart";
+import {Product} from "types/Product";
 import {getImageURL} from "utils/Image";
-import {Link} from "react-router-dom";
 
 const Cart = () => {
     const [cart, setCart] = useCallAPIState<Cart<Product>[]>(

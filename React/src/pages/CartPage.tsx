@@ -1,5 +1,5 @@
-import Cart from "components/Cart/elements/Cart";
 import Breadcrumb from "components/Breadcrumb";
+import Cart from "components/Cart/elements/Cart";
 
 const HomePage = () => {
 
