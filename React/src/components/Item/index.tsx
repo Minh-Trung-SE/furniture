@@ -1,3 +1,4 @@
+import {TRIGGER_TOAST_TYPE, triggerToast} from "common/Sonner";
 import {loadCart} from "contexts/Cart/Mindleware";
 import {AppDispatch} from "contexts/root";
 import {FC, useCallback} from "react";
@@ -17,12 +18,21 @@ const Item: FC<ItemProps> = ({item}) => {
 
     const addToCart = useCallback(
         async () => {
-            await CartService.addProduct(
+            const {success} = await CartService.addProduct(
                 {
                     productId: item.id,
                     quantity: 1
                 }
             )
+
+            triggerToast(
+                {
+                    type: success ? TRIGGER_TOAST_TYPE.SUCCESS : TRIGGER_TOAST_TYPE.ERROR,
+                    header: success ? "Success" : "Error",
+                    body: success ? "Product added to cart" : "Failed to add product to cart"
+                }
+            )
+
             dispatch(loadCart())
         },
         [item.id, dispatch]

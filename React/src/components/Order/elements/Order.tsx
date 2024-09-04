@@ -1,17 +1,25 @@
+import {TRIGGER_TOAST_TYPE, triggerToast} from "common/Sonner";
+import {HTTP_CODE} from "constants/HTTP";
+import {loadOrder} from "contexts/Order/Mindleware";
+import {AppDispatch} from "contexts/root";
 import React, {useCallback, useEffect, useMemo} from 'react';
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
+import {useDispatch} from "react-redux";
+import OrderService from "services/OrderService";
 import {Product} from "types/Product";
 import CartService from "services/CartService";
 import {type Cart} from "types/Cart";
-import {Form, TextAreaInput, TextInput} from "common/ReactHookForm";
+import {DropdownInput, Form, TextAreaInput, TextInput} from "common/ReactHookForm";
 import {joiResolver} from "@hookform/resolvers/joi";
 import Joi from "joi";
-import {useSearchParams} from "react-router-dom";
-import OrderService from "../../../services/OrderService.ts";
+import {useNavigate, useSearchParams} from "react-router-dom";
+
 
 
 const Order = () => {
     const [params] = useSearchParams()
+    const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>()
 
     const [cart, setCart] = useCallAPIState<Cart<Product>[]>(
         {
@@ -62,7 +70,7 @@ const Order = () => {
                     zipCode: "",
                     phoneNumber: "",
                     emailAddress: "",
-
+                    paymentMethod: "VNPAY",
                 },
                 resolver: joiResolver(
                     Joi.object({
@@ -85,20 +93,49 @@ const Order = () => {
                             'string.empty': 'Email Address is required',
                             'string.email': 'Please enter a valid email address'
                         }),
+                        paymentMethod: Joi.string().required().messages({
+                            'string.empty': 'Payment Method is required'
+                        }),
                     })
                 ),
 
             }}
             onSubmit={
-                async (values) => {
-                    const order = await OrderService.addOrder(
+                async ({paymentMethod, ...values}) => {
+                    const {error, code, payload} = await OrderService.addOrder<{url: string}>(
                         {
+                            paymentMethod,
                             attributes: values,
                             products: cart.data.map(item => item.productId)
                         }
                     )
 
-                    console.log(order)
+                    if (error){
+                        triggerToast(
+                            {
+                                type: TRIGGER_TOAST_TYPE.ERROR,
+                                header: "Error",
+                                body: "Something went wrong"
+                            }
+                        )
+                        return
+                    }
+
+                    dispatch(loadOrder())
+
+                    if (code === HTTP_CODE.CONTINUE){
+                        window.location.href = payload?.url ?? window.location.href
+                        return
+                    }
+
+                    triggerToast(
+                        {
+                            type: TRIGGER_TOAST_TYPE.SUCCESS,
+                            header: "Success",
+                            body: "Order created successfully"
+                        }
+                    )
+                    navigate("/orders")
 
                 }
             }
@@ -132,6 +169,27 @@ const Order = () => {
                                 Zip code
                             </label>
                             <TextInput controller={{name: "zipCode"}} type="text" className="input-box"/>
+                        </div>
+
+                        <div>
+                            <label className="text-gray-600 mb-2 block">
+                                Payment Method
+                            </label>
+                            <DropdownInput
+                                items={
+                                    [
+                                        {
+                                            name: "Online (VNPAY)",
+                                            value: "VNPAY"
+                                        },
+                                        {
+                                            name: "Purchase and Pay on Delivery (COD)",
+                                            value: "COD"
+                                        }
+                                    ]
+                                }
+                                control={{name: "paymentMethod"}}
+                            />
                         </div>
 
                         <div>
@@ -174,10 +232,12 @@ const Order = () => {
                             )
                         }
                     </div>
-                    <div className="flex justify-between border-b border-gray-200">
+                    <div className="flex justify-between border-gray-200">
                         <h4 className="text-gray-800 font-medium my-3 uppercase">Shipping</h4>
                         <h4 className="text-gray-800 font-medium my-3 uppercase">Free</h4>
                     </div>
+                    <hr/>
+
                     <div className="flex justify-between">
                         <h4 className="text-gray-800 font-semibold my-3 uppercase">Total</h4>
                         <h4 className="text-gray-800 font-semibold my-3 uppercase">${total}</h4>

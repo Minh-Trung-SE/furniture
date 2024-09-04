@@ -22,25 +22,44 @@ function formatDate(date) {
 
 class VNPayService {
     /**
-     * Register a new user
+     * @typedef {Object} VNPayTransaction
+     * @property {string} url - The URL to redirect the user to VNPAY
+     * @property {Object} params - The params data
+     * @property {number} params.vnp_Amount
+     * @property {string} params.vnp_CreateDate
+     * @property {string} params.vnp_Command
+     * @property {string} params.vnp_IpAddr
+     * @property {string} params.vnp_Locale
+     * @property {string} params.vnp_OrderInfo
+     * @property {string} params.vnp_OrderType
+     * @property {string} params.vnp_ReturnUrl
+     * @property {string} params.vnp_TmnCode
+     * @property {string} params.vnp_TxnRef
+     *
+     * Create transaction
      * @async
      * @static
-     * @returns {Promise<JsonResult>}
+     * @param {number} amount
+     * @returns {Promise<VNPayTransaction>}
+     *
      */
-    static async generateUrl() {
+    static async generateUrl(amount) {
         const ip = "127.0.0.1";
+
         const VNPAY_URL = process.env.VNPAY_URL
+        const USD_TO_VND_RATE = 24874
+
 
         const params = {
             'vnp_Command': 'pay',
-            'vnp_Amount': 8000,
+            'vnp_Amount': (amount * USD_TO_VND_RATE) * 100,
             'vnp_CreateDate': formatDate(new Date()),
-            'vnp_CurrCode': "USD",
+            'vnp_CurrCode': "VND",
             'vnp_IpAddr': ip,
             'vnp_Locale': "vn",
             'vnp_OrderInfo': "Purchase",
             'vnp_OrderType': "other",
-            'vnp_ReturnUrl': "http://localhost:8080/vnpay/return",
+            'vnp_ReturnUrl': process.env.VNPAY_CALLBACK_URL,
             'vnp_TmnCode': process.env.VNPAY_CODE,
             'vnp_TxnRef': crypto.randomUUID().toString(),
             'vnp_Version': '2.1.0',
@@ -61,21 +80,10 @@ class VNPayService {
             )
         )
 
-        return JsonResult.builder(
-            HTTP_CODE.OK,
-            HTTP_CODE.OK,
-            `${VNPAY_URL}?${query}`,
-            HTTP_REASON.OK
-        )
-    }
-
-    static async return() {
-        return JsonResult.builder(
-            HTTP_CODE.OK,
-            HTTP_CODE.OK,
-            "OK",
-            HTTP_REASON.OK
-        )
+        return {
+            url: `${VNPAY_URL}?${query}`,
+            params: sortedParams
+        }
     }
 }
 

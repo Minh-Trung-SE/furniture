@@ -6,6 +6,7 @@ const {Op} = require("sequelize");
 const {Order} = require("@models/Order/OrderModel");
 const {Product} = require("@models/Product/ProductModel");
 const {OrderItem} = require("@models/OrderItem/OrderItemModel");
+const {VNPayService} = require("@services/VNPayService");
 
 
 
@@ -44,15 +45,21 @@ class OrderService {
             )
         }
 
+        const totalAmount = items.reduce(
+            (total, item) => total + (item.quantity * item.product.price),
+            0
+        )
+
         const order = await Order.create(
             {
                 userId: id,
                 status: "PENDING",
                 attributes: dto.attributes,
-                totalAmount: items.reduce(
-                    (total, item) => total + (item.quantity * item.product.price),
-                    0
-                )
+                totalAmount,
+                meta: {
+                    paymentMethod: dto.paymentMethod,
+                    paymentStatus: "PENDING"
+                }
             }
         )
 
@@ -67,6 +74,16 @@ class OrderService {
             )
             await item.destroy()
         }
+
+        if (dto.paymentMethod === "VNPAY") {
+            return  JsonResult.builder(
+                HTTP_CODE.OK,
+                HTTP_CODE.CONTINUE,
+                await VNPayService.generateUrl(totalAmount),
+                "Add item successfully."
+            )
+        }
+
         return JsonResult.builder(
             HTTP_CODE.OK,
             HTTP_CODE.OK,

@@ -18,6 +18,7 @@ import OrderPage from "pages/OrderPage";
 import ProductPage from "pages/ProductPage";
 import RegisterPage from "pages/RegisterPage";
 import SearchPage from "pages/SearchPage";
+import VNPayPage from "pages/VNPayPage";
 import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -65,6 +66,7 @@ const AppRouters = () => {
                     <Route path="cart" element={<CartPage/>}/>
                     <Route path="orders/create" element={<CreateOrderPage/>}/>
                     <Route path="orders" element={<OrderPage/>}/>
+                    <Route path="orders/vn-pay" element={<VNPayPage/>}/>
                     <Route path="search" element={<SearchPage/>}/>
                     <Route path="product" element={<ProductPage/>}/>
                     <Route path="register" element={<RegisterPage/>}/>

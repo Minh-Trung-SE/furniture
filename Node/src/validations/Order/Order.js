@@ -2,6 +2,7 @@ const Joi = require("joi");
 
 /**
  * @typedef {Object} OrderDTO
+ * @property {string} paymentMethod - The payment method of the order.
  * @property {Object} attributes
  * @property {string} attributes.firstName - The first name of the user.
  * @property {string} attributes.lastName - The last name of the user.
@@ -15,6 +16,9 @@ const Joi = require("joi");
 /**@type {import("joi").Schema<ProductDTO>}}*/
 const OrderSchema = Joi.object(
     {
+        paymentMethod: Joi.string().required().messages({
+            'string.empty': 'Payment Method is required'
+        }),
         attributes: {
             firstName: Joi.string().required().messages(
                 {
