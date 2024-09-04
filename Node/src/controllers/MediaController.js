@@ -14,7 +14,7 @@ class MediaController {
         {
             storage: multer.diskStorage(
                 {
-                    destination: "D:\\Upload",
+                    destination: process.env.IMAGE_STORAGE,
                     filename: (request, file, callback) => {
                         const fileName = randomUUID().toString().concat(file.originalname.substring(file.originalname.lastIndexOf(".")))
                         callback(null, fileName)
