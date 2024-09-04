@@ -3,13 +3,13 @@ const {wrapperSyncHandler} = require("@helpers/ErrorWrapper");
 const router = require("express").Router()
 
 router.post(
-    "/api/media",
+    "/media",
     MediaController.getMulter().array("media"),
     MediaController.handleUpload
 )
 
 router.get(
-    "/api/media/:slug",
+    "/media/:slug",
     wrapperSyncHandler(
         MediaController.getMedia
     )
