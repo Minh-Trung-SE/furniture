@@ -1,5 +1,6 @@
 const {Sequelize} = require('sequelize')
 
+
 const Postgres = new Sequelize(
     {
         host: process.env.POSTGRES_HOST,
@@ -10,7 +11,13 @@ const Postgres = new Sequelize(
         dialect: "postgres",
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         logging: false,
-        logQueryParameters: true
+        logQueryParameters: true,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false
+            }
+        }
     }
 )
 
