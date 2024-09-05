@@ -14,7 +14,6 @@ import {Product} from "types/Product";
 const Order = () => {
     const order = useSelector<AppState>(state => state.order.order) as Order<Product>[]
 
-
     return (
         <div>
             <Popover.Root>
@@ -54,7 +53,7 @@ const Order = () => {
                         {
                             isEmpty(order) ? <EmptyCart/> : (
                                 <>
-                                    <ul className="p-5 space-y-5">
+                                    <ul className="p-5 space-y-5 max-h-80 overflow-scroll">
                                         {
                                             order.map(
                                                 (item) => (
@@ -76,7 +75,7 @@ const Order = () => {
                                                                     {item.status.toLowerCase()}
                                                                 </Badge>
                                                                 <span
-                                                                    className="text-primary font-medium">{item.totalAmount}</span>
+                                                                    className="text-primary font-medium">${item.totalAmount}</span>
                                                             </div>
 
                                                         </div>

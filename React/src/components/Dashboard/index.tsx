@@ -1,10 +1,12 @@
+import OrderBar from "components/Dashboard/elements/OrderBar";
 import OrderStatistics from "components/Dashboard/elements/OrderStatistics";
 
 
 const Dashboard = () => {
     return (
-        <div>
+        <div className="space-y-5">
             <OrderStatistics/>
+            <OrderBar/>
         </div>
     );
 };

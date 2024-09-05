@@ -7,5 +7,6 @@ router.use(require("@routers/Media"))
 router.use(require("@routers/Cart"))
 router.use(require("@routers/Order"))
 router.use(require("@routers/VNPay"))
+router.use(require("@routers/Statistics"))
 
 module.exports = router
