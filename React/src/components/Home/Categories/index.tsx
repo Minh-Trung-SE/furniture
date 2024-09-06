@@ -43,7 +43,6 @@ const Categories = () => {
                                     src={getImageURL(category?.attributes?.image)}
                                     className="w-full"
                                     alt="category"
-
                                 />
                                 <Link
 

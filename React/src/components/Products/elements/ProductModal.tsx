@@ -59,11 +59,14 @@ const ProductModal: FC<RowModel<Product>> = ({row, table, index}) => {
                             </svg>
                         </Modal.Trigger>
                     </div>
-                    <Form<Omit<Product, "id" | "createdAt" | "updatedAt" | "meta" | "rating">>
+                    <Form<Omit<Product, "id" | "createdAt" | "updatedAt" | "meta">>
                         id={id}
                         options={
                             {
-                                defaultValues: row,
+                                defaultValues: {
+                                    ...row,
+                                    rating: row.rating ?? 5
+                                },
                                 resolver: joiResolver(
                                     Joi.object(
                                         {
