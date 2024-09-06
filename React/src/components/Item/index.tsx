@@ -101,7 +101,7 @@ const Item: FC<ItemProps> = ({item}) => {
                 </Link>
                 <div className="flex items-baseline mb-1 space-x-2">
                     <p className="text-xl text-primary font-roboto font-semibold">{item.price}</p>
-                    <p className="text-sm text-gray-400 font-roboto line-through">{item.price}</p>
+                    <p className="text-sm text-gray-400 font-roboto line-through">{item.oldPrice}</p>
                 </div>
                 <div className="flex items-center">
                     <div className="flex gap-1 text-sm text-yellow-400">

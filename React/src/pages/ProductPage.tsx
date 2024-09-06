@@ -275,7 +275,7 @@ const ProductPage = () => {
                                             className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">
                                             -
                                         </div>
-                                        <div className="h-8 w-10 flex items-center justify-center">4</div>
+                                        <div className="h-8 w-10 flex items-center justify-center">{product.data?.quantity}</div>
                                         <div
                                             className="h-8 w-8 text-xl flex items-center justify-center cursor-pointer select-none">
                                             +
