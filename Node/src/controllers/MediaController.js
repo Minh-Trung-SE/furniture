@@ -68,7 +68,7 @@ class MediaController {
     static getMedia(request, response, next) {
         const {slug} = JoiValidator.validate(request.params, SlugSchema)
         const attachmentPath = path.join(
-            "D:\\Upload",
+            process.env.IMAGE_STORAGE,
             slug
         )
 
