@@ -3,6 +3,7 @@ import {useCallback, useEffect} from "react";
 import {Link} from "react-router-dom";
 import CategoryService from "services/CategoryService";
 import {Category} from "types/Category";
+import {getImageURL} from "utils/Image";
 
 
 const Categories = () => {
@@ -38,7 +39,7 @@ const Categories = () => {
                         (category) => (
                             <div key={category.id} className="relative group rounded-sm overflow-hidden">
                                 <img
-                                    src={"http://localhost:8080/api/media/".concat(category?.attributes?.image)}
+                                    src={getImageURL(category?.attributes?.image)}
                                     className="w-full"
                                     alt="category"
 

@@ -5,6 +5,7 @@ import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
 import {isArray, isEmpty} from "lodash";
 import {ChangeEvent, FC, HTMLAttributes, useCallback} from "react";
 import {useController, UseControllerProps, useFormContext} from "react-hook-form";
+import {getImageURL} from "utils/Image";
 
 type FileInputProps = HTMLAttributes<HTMLLabelElement> & {
     controller: UseControllerProps,
@@ -49,7 +50,7 @@ const FileInput: FC<FileInputProps> = ({className, controller, uploadOnChange = 
             }
             const {success, payload} = await requestApiHelper<MediaResponse[]>(
                 interceptor.post(
-                    "api/media",
+                    "media",
                     formData,
                     {
                         headers: {
@@ -169,12 +170,12 @@ const FileInput: FC<FileInputProps> = ({className, controller, uploadOnChange = 
                         {
                             field.value.map(
                                 (file) => <img className="object-cover" key={file} alt="Image"
-                                               src={`http://localhost:8080/api/media/${file}`}/>
+                                               src={getImageURL(file)}/>
                             )
                         }
                     </div>
                 ) : (
-                    <img key={field.value} alt="Image" src={`http://localhost:8080/api/media/${field.value}`}/>
+                    <img key={field.value} alt="Image" src={getImageURL(field.value)}/>
                 )
             }
 
