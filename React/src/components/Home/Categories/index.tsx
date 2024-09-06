@@ -1,4 +1,5 @@
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
+import {nanoid} from "nanoid/non-secure";
 import {useCallback, useEffect} from "react";
 import {Link} from "react-router-dom";
 import CategoryService from "services/CategoryService";
@@ -37,7 +38,7 @@ const Categories = () => {
                 {
                     categories.data.map(
                         (category) => (
-                            <div key={category.id} className="relative group rounded-sm overflow-hidden">
+                            <div key={nanoid()} className="relative group rounded-sm overflow-hidden">
                                 <img
                                     src={getImageURL(category?.attributes?.image)}
                                     className="w-full"
