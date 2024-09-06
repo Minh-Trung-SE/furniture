@@ -80,7 +80,7 @@ class MediaController {
             );
         }
 
-        response.sendFile(attachmentPath)
+        fs.createReadStream(attachmentPath).pipe(response);
     }
 
 
