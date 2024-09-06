@@ -80,6 +80,7 @@ class MediaController {
             );
         }
 
+        response.sendFile(attachmentPath)
     }
 
 
