@@ -30,7 +30,7 @@ const ProductSchema = Joi.object(
         sku: Joi.string().optional().max(50),
         description: Joi.string().optional(),
         quantity: Joi.number().required().min(0),
-        rating: Joi.number().optional().min(0).max(5),
+        rating: Joi.number().optional().min(0).max(5).default(5),
         attributes: Joi.object().optional().default(
             {}
         ),
