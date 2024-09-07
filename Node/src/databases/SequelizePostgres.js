@@ -12,12 +12,12 @@ const Postgres = new Sequelize(
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         logging: false,
         logQueryParameters: true,
-        dialectOptions: {
+        dialectOptions: process.env.POSTGRES_SSL === "true" ? {
             ssl: {
-                require: true,
+                require: false,
                 rejectUnauthorized: false
             }
-        }
+        } : undefined
     }
 )
 

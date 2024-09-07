@@ -1,6 +1,6 @@
 import {isInteger} from "lodash";
 
-function calculatePercentage(amount: number, total: number, fixed: number = 2) {
+function calculatePercentage(amount: number, total: number, fixed: number = 1) {
     if(amount === 0 || total === 0) {
         return 0
     }

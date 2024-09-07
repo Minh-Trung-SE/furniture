@@ -1,8 +1,9 @@
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
+import {twMerge} from "tailwind-merge";
 
 
 const Sidebar = () => {
-
+    const {pathname} = useLocation()
     return (
         <nav
             className="h-full border-r w-60 flex flex-col space-y-2 overflow-y-hidden"
@@ -28,11 +29,45 @@ const Sidebar = () => {
             </div>
             <ul className="list-none overflow-y-scroll">
                 <li
-                    className="border-l-2.5 border-primary p-2 rounded-sm"
+                    className={
+                        twMerge(
+                            "border-l-2.5 p-2 rounded-sm transition-all duration-200",
+                            pathname === "/dashboard" ? "border-primary text-primary" : "border-transparent text-secondary opacity-80"
+                        )
+                    }
+                >
+                    <Link
+                        to="/dashboard"
+                        className="flex items-center space-x-2"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
+                             stroke="currentColor" className="size-5">
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z"/>
+                            <path strokeLinecap="round" strokeLinejoin="round"
+                                  d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z"/>
+                        </svg>
+
+
+                        <span
+                            className="font-medium text-sm"
+                        >
+                            Overview
+                        </span>
+
+                    </Link>
+                </li>
+                <li
+                    className={
+                        twMerge(
+                            "border-l-2.5 p-2 rounded-sm transition-all duration-200",
+                            pathname === "/dashboard/orders" ? "border-primary text-primary" : "border-transparent text-secondary opacity-80"
+                        )
+                    }
                 >
                     <Link
                         to="/dashboard/orders"
-                        className="text-primary flex items-center space-x-2"
+                        className="flex items-center space-x-2"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                              stroke="currentColor" className="size-5">
@@ -41,7 +76,7 @@ const Sidebar = () => {
                         </svg>
 
                         <span
-                            className="text-primary font-medium text-sm"
+                            className="font-medium text-sm"
                         >
                             Orders
                         </span>
@@ -49,11 +84,16 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li
-                    className="border-l-2.5 border-primary p-2 rounded-sm"
+                    className={
+                        twMerge(
+                            "border-l-2.5 p-2 rounded-sm transition-all duration-200",
+                            pathname === "/dashboard/categories" ? "border-primary text-primary" : "border-transparent text-secondary opacity-80"
+                        )
+                    }
                 >
                     <Link
                         to="/dashboard/categories"
-                        className="text-primary flex items-center space-x-2"
+                        className="flex items-center space-x-2"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none">
                             <path
@@ -62,7 +102,7 @@ const Sidebar = () => {
                             />
                         </svg>
                         <span
-                            className="text-primary font-medium text-sm"
+                            className="font-medium text-sm"
                         >
                             Categories
                         </span>
@@ -70,11 +110,16 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li
-                    className="border-l-2.5 hover:bg-zinc-200 border-transparent p-2 rounded-sm"
+                    className={
+                        twMerge(
+                            "border-l-2.5 p-2 rounded-sm transition-all duration-200",
+                            pathname === "/dashboard/products" ? "border-primary text-primary" : "border-transparent text-secondary opacity-80"
+                        )
+                    }
                 >
                     <Link
                         to="/dashboard/products"
-                        className="text-secondary opacity-80 flex items-center space-x-2"
+                        className="flex items-center space-x-2"
                     >
                         <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path

@@ -4,9 +4,11 @@ import OrderStatistics from "components/Dashboard/elements/OrderStatistics";
 
 const Dashboard = () => {
     return (
-        <div className="space-y-5">
+        <div className="flex gap-5">
+            <div className="grow">
+                <OrderBar/>
+            </div>
             <OrderStatistics/>
-            <OrderBar/>
         </div>
     );
 };

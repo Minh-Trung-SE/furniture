@@ -38,7 +38,7 @@ const Item: FC<ItemProps> = ({item}) => {
         [item.id, dispatch]
     )
     return (
-        <div className="group rounded bg-white shadow overflow-hidden">
+        <div className="group rounded bg-white shadow overflow-hidden hover:scale-105 transition-all duration-500">
 
             <div className="relative">
                 <img
@@ -95,7 +95,7 @@ const Item: FC<ItemProps> = ({item}) => {
 
             <div className="pt-4 pb-3 px-4">
                 <Link to={`/product?slug=${item.id}`}>
-                    <h4 className="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">
+                    <h4 className="uppercase font-medium text-xl truncate mb-2 text-gray-800 hover:text-primary transition">
                         {item.name}
                     </h4>
                 </Link>

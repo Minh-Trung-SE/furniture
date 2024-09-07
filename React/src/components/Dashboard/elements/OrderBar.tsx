@@ -160,7 +160,7 @@ const OrderBar = () => {
 
             <h2 className="text-lg font-semibold">Order Statistics</h2>
 
-            <div  className="h-96 w-full">
+            <div  className="h-80 w-full">
                 <ResponsiveContainer
                    width="100%"
                    height="100%"

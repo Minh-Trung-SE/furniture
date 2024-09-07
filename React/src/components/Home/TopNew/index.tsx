@@ -37,7 +37,9 @@ const TopNew = () => {
                 className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6"
             >
                 {
-                    items.data.map((item) => <Item key={item.id} item={item}/>)
+                    items.data.sort(
+                        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                    ).slice(0, 4).map((item) => <Item key={item.id} item={item}/>)
                 }
 
             </div>
