@@ -33,6 +33,14 @@ class AuthenticateService {
             )
         )
     }
+
+    static logout() {
+        return requestApiHelper(
+            interceptor.get(
+                "logout"
+            )
+        )
+    }
 }
 
 export default AuthenticateService

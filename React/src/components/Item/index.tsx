@@ -1,9 +1,10 @@
 import {TRIGGER_TOAST_TYPE, triggerToast} from "common/Sonner";
+import {AUTHENTICATE_STATUS} from "contexts/Authenticate";
 import {loadCart} from "contexts/Cart/Mindleware";
-import {AppDispatch} from "contexts/root";
+import {AppDispatch, AppState} from "contexts/root";
 import {FC, useCallback} from "react";
-import {useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
 import CartService from "services/CartService";
 import {Product} from "types/Product";
 import {getImageURL} from "utils/Image";
@@ -13,11 +14,26 @@ type ItemProps = {
 }
 
 const Item: FC<ItemProps> = ({item}) => {
+    const credential = useSelector<AppState>(state => state.authenticate.status)
+    const navigate = useNavigate()
 
     const dispatch = useDispatch<AppDispatch>()
 
     const addToCart = useCallback(
         async () => {
+            if (credential !== AUTHENTICATE_STATUS.AUTHENTICATED) {
+                navigate("/login")
+
+                triggerToast(
+                    {
+                        type: TRIGGER_TOAST_TYPE.INFO,
+                        header: "Info",
+                        body: "Use are not logged in. Please login first!"
+                    }
+                )
+                return
+            }
+
             const {success} = await CartService.addProduct(
                 {
                     productId: item.id,
@@ -35,7 +51,7 @@ const Item: FC<ItemProps> = ({item}) => {
 
             dispatch(loadCart())
         },
-        [item.id, dispatch]
+        [credential, item.id, dispatch, navigate]
     )
     return (
         <div className="group rounded bg-white shadow overflow-hidden hover:scale-105 transition-all duration-500">

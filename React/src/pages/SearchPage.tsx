@@ -50,7 +50,7 @@ const SearchPage = () => {
                 items={
                     [
                         {
-                            label: "search",
+                            label: "Shop",
                             to: "/search"
                         }
                     ]

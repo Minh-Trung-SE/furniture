@@ -19,4 +19,10 @@ router.get(
     wrapperAsyncHandler(AuthenticateController.credential)
 )
 
+router.get(
+    "/logout",
+    authenticate,
+    wrapperAsyncHandler(AuthenticateController.logout)
+)
+
 module.exports = router

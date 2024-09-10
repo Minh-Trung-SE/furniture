@@ -81,7 +81,15 @@ class AuthenticateController {
      */
 
     static async logout(request, response) {
-        (await AuthenticationService.register(JoiValidator.validate(request.body, RegisterSchema))).send(response)
+        response.clearCookie("session")
+        response.send(
+            JsonResult.builder(
+                HTTP_CODE.OK,
+                HTTP_CODE.OK,
+                null,
+                HTTP_REASON.OK
+            )
+        )
     }
 }
 

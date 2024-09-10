@@ -9,7 +9,9 @@ import {loadOrder} from "contexts/Order/Mindleware";
 import {AppDispatch, AppState} from "contexts/root";
 import DashboardLayout from "layouts/DashboardLayout";
 import MainLayout from "layouts/MainLayout";
+import AboutUsPage from "pages/AboutUsPage";
 import CartPage from "pages/CartPage";
+import ContactPage from "pages/ContactPage";
 import CreateOrderPage from "pages/CreateOrderPage.tsx";
 import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
@@ -63,6 +65,8 @@ const AppRouters = () => {
                 <Route path="*" element={<MainLayout/>}>
                     <Route path="*" element={<HomePage/>}/>
                     <Route path="login" element={<LoginPage/>}/>
+                    <Route path="about-us" element={<AboutUsPage/>}/>
+                    <Route path="contact" element={<ContactPage/>}/>
                     <Route path="cart" element={<CartPage/>}/>
                     <Route path="orders/create" element={<CreateOrderPage/>}/>
                     <Route path="orders" element={<OrderPage/>}/>
