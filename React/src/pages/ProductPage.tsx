@@ -1,5 +1,6 @@
 import Button from "common/Button";
 import Breadcrumb from "components/Breadcrumb";
+import Recommend from "components/Home/Recommend";
 import {loadCart} from "contexts/Cart/Mindleware";
 import {AppDispatch} from "contexts/root";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
@@ -339,7 +340,7 @@ const ProductPage = () => {
 
                         </div>
 
-
+                        <Recommend productId={product.data?.id} categoryId={product.data?.categoryId}/>
                     </div>
                 )
             }

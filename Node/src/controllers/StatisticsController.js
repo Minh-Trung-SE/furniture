@@ -17,6 +17,13 @@ class StatisticsController {
         (await StatisticService.orderStatisticGroupByDate()).send(response)
     }
 
+    /*
+     * @param {import("express").Request} request
+     * @param {import("express").Response} response
+     */
+    static async getTopSellingProducts(request, response) {
+        (await StatisticService.topSellingProducts()).send(response)
+    }
 }
 
 module.exports = {

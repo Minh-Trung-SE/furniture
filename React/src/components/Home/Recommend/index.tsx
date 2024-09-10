@@ -1,10 +1,11 @@
 import Item from "components/Item";
 import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
-import {useCallback, useEffect} from "react";
+import {isEmpty, isUndefined} from "lodash";
+import {FC, useCallback, useEffect} from "react";
 import ProductService from "services/ProductService";
 import {Product} from "types/Product";
 
-const Recommend = () => {
+const Recommend:FC<{categoryId?: number, productId?: number}> = ({categoryId, productId}) => {
     const [items, setItems] = useCallAPIState<Product[]>(
         {
             status: CALL_API_STATUS.IDLE,
@@ -16,17 +17,24 @@ const Recommend = () => {
         setItems(CALL_API_STATUS.LOADING, [])
         const {payload, success} = await ProductService.get()
         if (success) {
-            setItems(CALL_API_STATUS.SUCCESS, payload)
+            setItems(
+                CALL_API_STATUS.SUCCESS,
+                isUndefined(categoryId) && isUndefined(productId) ? payload : payload?.filter(
+                    (item) => {
+                       return item.categoryId === categoryId && item.id !== productId
+                    }
+                )
+            )
             return
         }
         setItems(CALL_API_STATUS.ERROR, [])
-    }, [setItems])
+    }, [setItems, categoryId, productId])
 
     useEffect(() => {
         fetchData()
     }, [fetchData])
 
-    return (
+    return isEmpty(items.data) ? null : (
         <div
             className="max-w-1200 mx-auto py-16"
         >
@@ -35,9 +43,8 @@ const Recommend = () => {
                 className="grid lg:grid-cols-4 sm:grid-cols-2 gap-6"
             >
                 {
-                    items.data.map((item) => <Item key={item.id} item={item}/>)
+                    items.data.slice(0, 12).map((item) => <Item key={item.id} item={item}/>)
                 }
-
             </div>
         </div>
     );
