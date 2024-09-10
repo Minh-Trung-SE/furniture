@@ -1,6 +1,9 @@
 import {CustomYAxisTick} from "common/Rechart/CustomYAxisTick";
 import {RoundedTopBarFill} from "common/Rechart/RoundedTopBarFill";
+import useCallAPIState, {CALL_API_STATUS} from "hooks/UseCallAPIState";
+import {useCallback, useEffect} from "react";
 import {Bar, CartesianGrid, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis,} from 'recharts';
+import StatisticsService from "services/StatisticsService";
 
 
 const data = [
@@ -78,95 +81,54 @@ const data = [
     },
 ];
 const COLORS = ['#7928ca', '#10b981', '#eab308'];
+
+type OrderStatisticByDate = Record<
+    string,
+    {
+        total: number,
+        pending: number,
+        processing: number,
+        cancelled: number,
+        completed: number
+    }
+>
 const OrderBar = () => {
 
-    // const [statistics, setStatistics] = useCallAPIState(
-    //     {
-    //         status: CALL_API_STATUS.IDLE,
-    //         data: {
-    //             total: 0,
-    //             completed: 0,
-    //             processing: 0,
-    //             pending: 0,
-    //             cancelled: 0,
-    //         }
-    //     }
-    // )
-    //
-    // const fetchData = useCallback(
-    //     async () => {
-    //         setStatistics(CALL_API_STATUS.LOADING)
-    //         const {success, payload} = await StatisticsService.getOrder()
-    //         if (success){
-    //             setStatistics(CALL_API_STATUS.SUCCESS, payload!)
-    //         }
-    //     }, [setStatistics]
-    // )
-    //
-    // useEffect(
-    //     () => {
-    //         fetchData()
-    //     },[fetchData]
-    // )
-    // const data = useMemo(
-    //     () => (
-    //         [
-    //             {
-    //                 id: 1,
-    //                 title: 'Total Completed',
-    //                 metric: statistics.data.completed,
-    //                 fill: '#59b259',
-    //                 percentage: calculatePercentage(statistics.data.completed, statistics.data.total),
-    //                 increased: true,
-    //                 decreased: false,
-    //                 value: '+32.40',
-    //             },
-    //             {
-    //                 id: 2,
-    //                 title: 'Total Pending',
-    //                 metric: statistics.data.pending,
-    //                 fill: '#077a88',
-    //                 percentage: calculatePercentage(statistics.data.pending, statistics.data.total),
-    //                 increased: true,
-    //                 decreased: false,
-    //                 value: '+32.40',
-    //             },
-    //             {
-    //                 id: 3,
-    //                 title: 'Total Processing',
-    //                 metric: statistics.data.processing,
-    //                 fill: '#3872FA',
-    //                 percentage: calculatePercentage(statistics.data.processing, statistics.data.total),
-    //                 increased: false,
-    //                 decreased: true,
-    //                 value: '-18.45',
-    //             },
-    //             {
-    //                 id: 4,
-    //                 title: 'Total Cancelled',
-    //                 metric: statistics.data.cancelled,
-    //                 fill: '#EE0000',
-    //                 percentage: calculatePercentage(statistics.data.cancelled, statistics.data.total),
-    //                 increased: true,
-    //                 decreased: false,
-    //                 value: '+20.34',
-    //             },
-    //         ]
-    //     ), [statistics.data]
-    // )
+    const [statistics, setStatistics] = useCallAPIState<OrderStatisticByDate[]>(
+        {
+            status: CALL_API_STATUS.IDLE,
+            data: []
+        }
+    )
+
+    const fetchData = useCallback(
+        async () => {
+            setStatistics(CALL_API_STATUS.LOADING)
+            const {success, payload} = await StatisticsService.getOrderByDate<OrderStatisticByDate[]>()
+            if (success) {
+                setStatistics(CALL_API_STATUS.SUCCESS, payload!)
+            }
+        }, [setStatistics]
+    )
+
+    useEffect(
+        () => {
+            fetchData()
+        }, [fetchData]
+    )
 
     return (
         <div className="p-5 space-y-5 border rounded shadow">
 
             <h2 className="text-lg font-semibold">Order Statistics</h2>
 
-            <div  className="h-80 w-full">
+            <div className="h-80 w-full">
                 <ResponsiveContainer
-                   width="100%"
-                   height="100%"
+                    width="100%"
+                    height="100%"
                 >
                     <ComposedChart
-                        data={data}
+                        data={statistics.data}
                         className="[&_.recharts-tooltip-cursor]:fill-opacity-20 dark:[&_.recharts-tooltip-cursor]:fill-opacity-10 [&_.recharts-cartesian-axis-tick-value]:fill-gray-500 [&_.recharts-cartesian-axis.yAxis]:-translate-y-3 rtl:[&_.recharts-cartesian-axis.yAxis]:-translate-x-12"
                     >
                         <CartesianGrid
@@ -179,31 +141,41 @@ const OrderBar = () => {
                             width={50}
                             axisLine={false}
                             tickLine={false}
-                            tick={<CustomYAxisTick />}
+                            tick={<CustomYAxisTick/>}
                         />
                         <Tooltip
                             cursor={false}
                         />
-                        <Bar
-                            dataKey="new"
-                            fill={COLORS[0]}
-                            barSize={28}
-                            shape={<RoundedTopBarFill />}
-                        />
-                        <Bar
-                            type="natural"
-                            dataKey="solved"
-                            fill={COLORS[1]}
-                            barSize={28}
-                            shape={<RoundedTopBarFill/>}
-                        />
                         <Line
                             type="natural"
-                            dataKey="overdue"
-                            stroke={COLORS[2]}
+                            dataKey="total"
+                            stroke="#2e5981"
                             dot={false}
                             strokeWidth={2}
                         />
+
+                        <Bar
+                            dataKey="processing"
+                            fill="#7928ca"
+                            barSize={28}
+                            shape={<RoundedTopBarFill/>}
+                        />
+
+                        <Bar
+                            type="natural"
+                            dataKey="pending"
+                            fill="#077a88"
+                            barSize={28}
+                            shape={<RoundedTopBarFill/>}
+                        />
+                        <Bar
+                            type="natural"
+                            dataKey="cancelled"
+                            fill="#ee0000"
+                            barSize={28}
+                            shape={<RoundedTopBarFill/>}
+                        />
+
                     </ComposedChart>
                 </ResponsiveContainer>
 

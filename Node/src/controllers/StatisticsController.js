@@ -9,6 +9,14 @@ class StatisticsController {
         (await StatisticService.orderStatistic()).send(response)
     }
 
+    /*
+     * @param {import("express").Request} request
+     * @param {import("express").Response} response
+     */
+    static async getOrderStatisticGetByDate(request, response) {
+        (await StatisticService.orderStatisticGroupByDate()).send(response)
+    }
+
 }
 
 module.exports = {

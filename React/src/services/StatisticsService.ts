@@ -11,6 +11,14 @@ class StatisticsService {
         )
     }
 
+    static async getOrderByDate<T>() {
+        return await requestApiHelper<T, T>(
+            interceptor.get(
+                "statistics/order/date"
+            )
+        )
+    }
+
 }
 
 export default StatisticsService

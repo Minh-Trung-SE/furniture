@@ -9,4 +9,10 @@ router.get(
     wrapperAsyncHandler(StatisticsController.getOrderStatistics)
 )
 
+router.get(
+    "/statistics/order/date",
+    authenticate,
+    wrapperAsyncHandler(StatisticsController.getOrderStatisticGetByDate)
+)
+
 module.exports = router
